@@ -1,3 +1,24 @@
+import flask
+import threading
+import os
+
+app = flask.Flask('')
+
+@app.route('/')
+def home():
+    return "I am alive!"
+
+def run():
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
+
+def keep_alive():
+    t = threading.Thread(target=run)
+    t.start()
+
+# استدعاء الدالة لتبدأ العمل في الخلفية
+keep_alive()
+
+
 import telebot
 import requests
 
